@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shanilka Lakshan | Full Stack Developer & ICT Educator</title>
+    <!-- Dark Mode Favicon Strategy -->
+    <link rel="icon" type="image/png" href="https://img.icons8.com/ios-filled/50/ffffff/codepen.png">
+
+    <!-- External Assets -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #030303;
+            --surface: #0a0a0c;
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.25);
+            --text: #ffffff;
+            --text-dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.06);
+            --glass: rgba(10, 10, 12, 0.7);
+            --transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            --gradient-1: linear-gradient(45deg, #6366f1, #a855f7);
+            --gradient-2: linear-gradient(45deg, #3b82f6, #2dd4bf);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        .serif {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+        }
+
+        p {
+            font-weight: 300;
+            letter-spacing: 0.2px;
+        }
+
+        /* Custom Cursor */
+        #cursor {
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s;
+        }
+
+        #cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .cursor-active #cursor {
+            transform: scale(3);
+            background: var(--accent);
+        }
+
+        .cursor-active #cursor-follower {
+            transform: scale(1.5);
+            border-color: transparent;
+            background: var(--accent-glow);
+        }
+
+        /* Layout Utilities */
+        .section-padding {
+            padding: 140px 10%;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Background Artifacts */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background-image: radial-gradient(var(--border) 1px, transparent 0);
+            background-size: 30px 30px;
+        }
+
+        .glow-spot {
+            position: fixed;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            z-index: -1;
+            filter: blur(100px);
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 30px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 15px 10%;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            margin-left: 40px;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        /* Stats Cards */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-10px);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .stat-card h5 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero h4 {
+            color: var(--accent);
+            font-size: 11px;
+            letter-spacing: 12px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(3.5rem, 12vw, 8.5rem);
+            line-height: 0.85;
+            letter-spacing: -4px;
+            margin-bottom: 40px;
+        }
+
+        .hero p {
+            max-width: 600px;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            margin-bottom: 50px;
+        }
+
+        .btn-prime {
+            padding: 22px 50px;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            border-radius: 2px;
+            display: inline-block;
+            transition: var(--transition);
+            box-shadow: 0 10px 40px var(--accent-glow);
+        }
+
+        .btn-prime:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px var(--accent-glow);
+            border-radius: 40px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 100px;
+        }
+
+        .section-header h4 {
+            font-size: 10px;
+            letter-spacing: 8px;
+            color: var(--accent);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+        }
+
+        /* Skills/Tech Grid */
+        .tech-category {
+            margin-bottom: 60px;
+        }
+
+        .tech-category h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Outfit';
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 25px;
+        }
+
+        .tech-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 35px 20px;
+            text-align: center;
+            border-radius: 20px;
+            transition: var(--transition);
+        }
+
+        .tech-card i {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        .tech-card span {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+        }
+
+        .tech-card:hover {
+            border-color: var(--accent);
+            background: radial-gradient(circle at center, #111 0%, #0a0a0c 100%);
+        }
+
+        .tech-card:hover i {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* Github Grid */
+        .github-activity-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .contribution-graph {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            padding: 30px;
+            overflow: hidden;
+        }
+
+        .contribution-graph img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Portfolio Items */
+        .project-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            margin-bottom: 180px;
+            align-items: center;
+        }
+
+        .project-item:nth-child(even) {
+            direction: rtl;
+        }
+
+        .project-item:nth-child(even) .project-content {
+            direction: ltr;
+        }
+
+        .project-visual {
+            background: #08080a;
+            aspect-ratio: 16/10;
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .project-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            transition: var(--transition);
+            filter: grayscale(1);
+        }
+
+        .project-visual::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, var(--bg), transparent);
+        }
+
+        .project-item:hover .project-visual img {
+            opacity: 1;
+            filter: grayscale(0);
+            transform: scale(1.05);
+        }
+
+        .project-item:hover .project-visual {
+            border-color: var(--accent);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+        }
+
+        .project-content h3 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+        }
+
+        .project-content p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .tech-badge {
+            padding: 6px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            font-size: 10px;
+            font-weight: 700;
+            border-radius: 100px;
+            letter-spacing: 1px;
+        }
+
+        .btn-link {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: 3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            text-transform: uppercase;
+        }
+
+        .btn-link::after {
+            content: '→';
+            transition: 0.3s;
+        }
+
+        .btn-link:hover {
+            color: #fff;
+        }
+
+        .btn-link:hover::after {
+            transform: translateX(10px);
+        }
+
+        /* GitHub Integrated */
+        .github-box {
+            background: var(--surface);
+            border-radius: 40px;
+            padding: 80px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .git-stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .git-stats-grid img {
+            width: 100%;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        /* Video / vlog Section */
+        .vlog-carousel {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .vlog-item {
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .vlog-item video {
+            width: 100%;
+            aspect-ratio: 9/16;
+            object-fit: cover;
+            display: block;
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+
+        .vlog-item:hover video {
+            opacity: 1;
+            transform: scale(1.02);
+        }
+
+        /* Education Timeline */
+        .edu-timeline {
+            max-width: 900px;
+        }
+
+        .edu-node {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 50px;
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+            transition: 0.4s;
+        }
+
+        .edu-node:hover {
+            background: rgba(255, 255, 255, 0.01);
+            padding-left: 20px;
+        }
+
+        .edu-node .year {
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .edu-node h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 140px 10% 80px;
+            background: #000;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-cta {
+            font-size: clamp(3rem, 8vw, 6rem);
+            letter-spacing: -4px;
+            margin-bottom: 60px;
+        }
+
+        .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .social-link {
+            width: 70px;
+            height: 70px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: 0.4s;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateY(-10px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+        }
+
+        @media (max-width: 1024px) {
+            .project-item {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .git-stats-grid,
+            .github-activity-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-padding {
+                padding: 80px 5%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            * {
+                cursor: auto !important;
+            }
+
+            #cursor,
+            #cursor-follower {
+                display: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .edu-node {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+    <div class="bg-grid"></div>
+    <div class="glow-spot" style="top: 0; left: 0;"></div>
+    <div class="glow-spot" style="bottom: 0; right: 0; opacity: 0.2;"></div>
+
+    <nav id="navbar">
+        <a href="#home" class="logo">SHANILKA.</a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Portfolio</a>
+            <a href="#skills">Skills</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#teaching">Teaching</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero section-padding" id="home">
+        <div data-aos="fade-up">
+            <h4>Software Engineer • ICT Educator</h4>
+            <h1>Engineering <br>Pure Logic.</h1>
+            <p>I architect scalable digital solutions and simplify the complexities of computing for the next generation
+                of engineers.</p>
+            <div style="margin-top: 20px;">
+                <a href="#projects" class="btn-prime">Explore Work</a>
+                <a href="https://wa.me/94767094260" class="btn-prime"
+                    style="background:transparent; border: 1px solid var(--border); margin-left: 20px;">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section-padding" id="about">
+        <div class="container project-item" data-aos="fade-up">
+            <div class="project-visual" style="aspect-ratio: 4/5;">
+                <img src="shanilka.jpeg" alt="Shanilka Lakshan" style="filter: none; opacity: 1; object-fit: cover;">
+            </div>
+            <div class="project-content">
+                <h4 style="color: var(--accent); letter-spacing: 8px; margin-bottom: 20px; text-transform: uppercase;">
+                    BIOGRAPHY</h4>
+                <h2 class="serif" style="font-size: 3rem; margin-bottom: 30px;">Architecting Logic.</h2>
+                <p>I am Shanilka Lakshan, a Full Stack Developer and ICT Educator dedicated to simplifying complex
+                    systems and nurturing the next generation of logical thinkers. Currently pursuing my BSc in Computer
+                    Science at NSBM Green University.</p>
+                <div
+                    style="background: rgba(255,255,255,0.02); padding:30px; border-radius: 20px; border: 1px solid var(--border);">
+                    <p style="font-size: 1rem; color: #fff; margin-bottom: 15px;"><i class="fas fa-university"
+                            style="color: var(--accent); margin-right: 15px;"></i> NSBM Green University</p>
+                    <p style="font-size: 1rem; color: #fff;"><i class="fas fa-graduation-cap"
+                            style="color: var(--accent); margin-right: 15px;"></i> ICT Educator @ Vidya Pradeepa</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Showcase -->
+    <section class="section-padding" id="projects">
+        <div class="section-header" data-aos="fade-up">
+            <h4>HANDCRAFTED</h4>
+            <h2>Development Projects.</h2>
+        </div>
+
+        <div class="container">
+            <!-- Project 1 -->
+            <div class="project-item" data-aos="fade-up">
+                <div class="project-visual">
+                    <img src="https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=2089" alt="E-Commerce">
+                </div>
+                <div class="project-content">
+                    <div class="tech-stack">
+                        <span class="tech-badge">JAVA</span>
+                        <span class="tech-badge">SQL</span>
+                        <span class="tech-badge">JSP</span>
+                        <span class="tech-badge">BOOTSTRAP</span>
+                    </div>
+                    <h3>ShopNest E-Commerce</h3>
+                    <p>A high-performance enterprise bazaar system emphasizing robust inventory serialization and
+                        complex relational database management for seamless scaling.</p>
+                    <a href="https://github.com/DarshanaChinthaka/web-project-EC.git" class="btn-link">Github
+                        Repository</a>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-item" data-aos="fade-up">
+                <div class="project-visual">
+                    <img src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?q=80&w=2071"
+                        alt="Laundry Management System">
+                </div>
+                <div class="project-content">
+                    <div class="tech-stack">
+                        <span class="tech-badge">SPRING BOOT</span>
+                        <span class="tech-badge">REACT JS</span>
+                        <span class="tech-badge">VITE</span>
+                        <span class="tech-badge">AXIOS</span>
+                        <span class="tech-badge">JWT</span>
+                    </div>
+                    <h3>Laundry Management System</h3>
+                    <p>Advanced lifecycle management for multi-branch laundry operations. Features micro-service
+                        authentication and real-time order tracking notifications.</p>
+                    <div style="display: flex; gap: 30px;">
+                        <a href="https://github.com/KawyaDissanayaka/laundry-pickup-delivery-management-system-frontend.git"
+                            class="btn-link">Frontend View</a>
+                        <a href="https://github.com/KawyaDissanayaka/laundry-pickup-delivery-management-system-backend.git"
+                            class="btn-link">Backend Core</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-item" data-aos="fade-up">
+                <div class="project-visual">
+                    <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?q=80&w=1896"
+                        alt="Medical AI">
+                </div>
+                <div class="project-content">
+                    <div class="tech-stack">
+                        <span class="tech-badge">PYTHON</span>
+                        <span class="tech-badge">NLP</span>
+                        <span class="tech-badge">FLASK</span>
+                        <span class="tech-badge">PANDAS</span>
+                    </div>
+                    <h3>Aegis Medical AI</h3>
+                    <p>Leveraging Natural Language Processing to diagnostic symptom triage. A Python-driven core
+                        providing instant medical insights through intelligent parsing.</p>
+                    <a href="https://github.com/KawyaDissanayaka/Medical_ChatBot.git" class="btn-link">Github
+                        Repository</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Technologies -->
+    <section class="section-padding" id="skills">
+        <div class="section-header" data-aos="fade-up">
+            <h4>EXPERTISE</h4>
+            <h2>Programming Languages.</h2>
+        </div>
+
+        <div class="container">
+            <div class="tech-category" data-aos="fade-up">
+                <h3>Core Languages</h3>
+                <div class="tech-grid">
+                    <div class="tech-card"><i class="fab fa-java"></i><span>JAVA SE/EE</span></div>
+                    <div class="tech-card"><i class="fab fa-python"></i><span>PYTHON</span></div>
+                    <div class="tech-card"><i class="fab fa-js"></i><span>JAVASCRIPT</span></div>
+                    <div class="tech-card"><i class="fas fa-database"></i><span>MYSQL / SQL</span></div>
+                    <div class="tech-card"><i class="fab fa-html5"></i><span>HTML5 / CSS3</span></div>
+                    <div class="tech-card"><i class="fas fa-code"></i><span>JSP / SERVLETS</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools & Frameworks -->
+    <section class="section-padding" id="tools" style="background: rgba(255,255,255,0.01);">
+        <div class="section-header" data-aos="fade-up">
+            <h4>ECOSYSTEM</h4>
+            <h2>Tools & Frameworks.</h2>
+        </div>
+
+        <div class="container">
+            <div class="tech-category" data-aos="fade-up">
+                <h3>Development Frameworks</h3>
+                <div class="tech-grid">
+                    <div class="tech-card"><i class="fas fa-leaf"></i><span>SPRING BOOT</span></div>
+                    <div class="tech-card"><i class="fab fa-react"></i><span>REACT JS</span></div>
+                    <div class="tech-card"><i class="fas fa-fire"></i><span>FLASK</span></div>
+                    <div class="tech-card"><i class="fas fa-bolt"></i><span>VITE</span></div>
+                </div>
+            </div>
+
+            <div class="tech-category" data-aos="fade-up">
+                <h3>Industry Standard Tools</h3>
+                <div class="tech-grid">
+                    <div class="tech-card"><i class="fab fa-git-alt"></i><span>GIT SOURCE</span></div>
+                    <div class="tech-card"><i class="fab fa-docker"></i><span>DOCKER</span></div>
+                    <div class="tech-card"><i class="fas fa-terminal"></i><span>TERMINAL</span></div>
+                    <div class="tech-card"><i class="fas fa-cloud"></i><span>POSTMAN</span></div>
+                    <div class="tech-card"><i class="fab fa-figma"></i><span>FIGMA</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Activity -->
+    <section class="section-padding" id="github">
+        <div class="container">
+            <div class="github-box" data-aos="zoom-in">
+                <h4 style="color: var(--accent); letter-spacing: 5px; margin-bottom: 20px;">OPEN SOURCE</h4>
+                <h2 class="serif" style="font-size: 3.5rem;">GitHub Activity.</h2>
+
+                <div class="github-activity-grid">
+                    <div class="contribution-graph">
+                        <img src="https://github-readme-activity-graph.vercel.app/graph?username=shanilka1&theme=tokyonight&bg_color=0a0a0c&hide_border=true&color=6366f1"
+                            alt="Activity Graph">
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <img src="https://github-readme-stats.vercel.app/api?username=shanilka1&show_icons=true&theme=tokyonight&bg_color=0a0a0c&border_color=6366f1&title_color=6366f1&text_color=94a3b8"
+                            alt="Stats" style="width: 100%; border-radius: 20px; border: 1px solid var(--border);">
+                        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=shanilka1&layout=compact&theme=tokyonight&bg_color=0a0a0c&border_color=6366f1&title_color=6366f1&text_color=94a3b8"
+                            alt="Langs" style="width: 100%; border-radius: 20px; border: 1px solid var(--border);">
+                    </div>
+                </div>
+
+                <div style="margin-top: 50px;">
+                    <a href="https://github.com/shanilka1" class="btn-prime">Follow @shanilka1 on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teaching Section -->
+    <section class="section-padding" id="teaching">
+        <div class="section-header" data-aos="fade-up">
+            <h4>ICT EDUCATION</h4>
+            <h2>Simplifying Complexity.</h2>
+        </div>
+
+        <div class="container project-item">
+            <div class="project-content">
+                <h3 class="serif">Grade 6 - 11 Classes</h3>
+                <p style="border-left: 2px solid var(--accent); padding-left: 25px;">පළමු වතාවට පොඩ්ඩන්ටත් <b>Mindmap
+                        සංකල්පය</b> කියා දෙන එකම පන්තිය. අපි සංකීර්ණ දේවල් සරලව ඉගෙන ගනිමු. No Pain No Gain.🅰️💯</p>
+
+                <div class="tech-category">
+                    <div class="tech-grid" style="grid-template-columns: 1fr 1fr;">
+                        <div style="font-size: 14px; margin-bottom: 10px;"><i class="fas fa-check-circle"
+                                style="color: var(--accent); margin-right: 12px;"></i> Special Tutes & Papers</div>
+                        <div style="font-size: 14px; margin-bottom: 10px;"><i class="fas fa-check-circle"
+                                style="color: var(--accent); margin-right: 12px;"></i> Modern Tech Stacks</div>
+                        <div style="font-size: 14px; margin-bottom: 10px;"><i class="fas fa-check-circle"
+                                style="color: var(--accent); margin-right: 12px;"></i> Logical Programming</div>
+                        <div style="font-size: 14px; margin-bottom: 10px;"><i class="fas fa-check-circle"
+                                style="color: var(--accent); margin-right: 12px;"></i> Mind-Mapping Skills</div>
+                    </div>
+                </div>
+
+                <div class="glass-box" style="padding: 25px; margin-bottom: 40px; border-radius: 15px;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 10px;">විද්‍යා ප්‍රදීප - වැල්ලවාය</h3>
+                    <p style="font-size: 0.9rem;">The most trusted center for ICT excellence in the region.</p>
+                </div>
+
+                <a href="https://chat.whatsapp.com/YOUR_GROUP_LINK" class="btn-prime"
+                    style="background:#25D366; width: 100%; text-align: center; border:none;">
+                    <i class="fab fa-whatsapp"></i> Whatsapp Community
+                </a>
+            </div>
+
+            <div class="vlog-carousel">
+                <div class="vlog-item">
+                    <video controls muted loop playsinline>
+                        <source src="boosts.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Gallery Section -->
+    <section class="section-padding" id="gallery" style="background: rgba(0,0,0,0.3);">
+        <div class="section-header" data-aos="fade-up">
+            <h4>MOMENTS</h4>
+            <h2>Highlights & Gallery.</h2>
+        </div>
+
+        <div class="container">
+            <div class="vlog-carousel" data-aos="fade-up">
+                <div class="vlog-item">
+                    <video controls muted loop playsinline>
+                        <source src="class.mp4" type="video/mp4">
+                    </video>
+                    <div style="padding: 15px; background: var(--surface); border-top: 1px solid var(--border);">
+                        <span
+                            style="font-size: 10px; color: var(--accent); letter-spacing: 2px; font-weight: 700;">EDUCATION</span>
+                    </div>
+                </div>
+                <div class="vlog-item">
+                    <video controls muted loop playsinline>
+                        <source src="boosts.mp4" type="video/mp4">
+                    </video>
+                    <div style="padding: 15px; background: var(--surface); border-top: 1px solid var(--border);">
+                        <span
+                            style="font-size: 10px; color: var(--accent); letter-spacing: 2px; font-weight: 700;">BOOSTS</span>
+                    </div>
+                </div>
+                <div class="vlog-item">
+                    <video controls muted loop playsinline>
+                        <source src="1.mp4" type="video/mp4">
+                    </video>
+                    <div style="padding: 15px; background: var(--surface); border-top: 1px solid var(--border);">
+                        <span
+                            style="font-size: 10px; color: var(--accent); letter-spacing: 2px; font-weight: 700;">HIGHLIGHT
+                            01</span>
+                    </div>
+                </div>
+                <div class="vlog-item">
+                    <video controls muted loop playsinline>
+                        <source src="2.mp4" type="video/mp4">
+                    </video>
+                    <div style="padding: 15px; background: var(--surface); border-top: 1px solid var(--border);">
+                        <span
+                            style="font-size: 10px; color: var(--accent); letter-spacing: 2px; font-weight: 700;">HIGHLIGHT
+                            02</span>
+                    </div>
+                </div>
+                <div class="vlog-item">
+                    <video controls muted loop playsinline>
+                        <source src="3.mp4" type="video/mp4">
+                    </video>
+                    <div style="padding: 15px; background: var(--surface); border-top: 1px solid var(--border);">
+                        <span
+                            style="font-size: 10px; color: var(--accent); letter-spacing: 2px; font-weight: 700;">HIGHLIGHT
+                            03</span>
+                    </div>
+                </div>
+                <div class="vlog-item">
+                    <video controls muted loop playsinline>
+                        <source src="4.mp4" type="video/mp4">
+                    </video>
+                    <div style="padding: 15px; background: var(--surface); border-top: 1px solid var(--border);">
+                        <span
+                            style="font-size: 10px; color: var(--accent); letter-spacing: 2px; font-weight: 700;">HIGHLIGHT
+                            04</span>
+                    </div>
+                </div>
+                <div class="vlog-item">
+                    <video controls muted loop playsinline>
+                        <source src="5.mp4" type="video/mp4">
+                    </video>
+                    <div style="padding: 15px; background: var(--surface); border-top: 1px solid var(--border);">
+                        <span
+                            style="font-size: 10px; color: var(--accent); letter-spacing: 2px; font-weight: 700;">HIGHLIGHT
+                            05</span>
+                    </div>
+                </div>
+                <div class="vlog-item">
+                    <video controls muted loop playsinline>
+                        <source src="6.mp4" type="video/mp4">
+                    </video>
+                    <div style="padding: 15px; background: var(--surface); border-top: 1px solid var(--border);">
+                        <span
+                            style="font-size: 10px; color: var(--accent); letter-spacing: 2px; font-weight: 700;">HIGHLIGHT
+                            06</span>
+                    </div>
+                </div>
+                <div class="vlog-item">
+                    <video controls muted loop playsinline>
+                        <source src="7.mp4" type="video/mp4">
+                    </video>
+                    <div style="padding: 15px; background: var(--surface); border-top: 1px solid var(--border);">
+                        <span
+                            style="font-size: 10px; color: var(--accent); letter-spacing: 2px; font-weight: 700;">HIGHLIGHT
+                            07</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Journey -->
+    <section class="section-padding">
+        <div class="section-header" data-aos="fade-up">
+            <h4>ACADEMIC</h4>
+            <h2>Educational Journey.</h2>
+        </div>
+
+        <div class="container edu-timeline">
+            <div class="edu-node" data-aos="fade-up">
+                <div class="year">2025 - PRESENT</div>
+                <div>
+                    <h3>BSc (Hons) Computer Science</h3>
+                    <p>NSBM Green University</p>
+                    <p style="font-size: 0.9rem; margin-top: 15px; opacity: 0.7;">Focusing on advanced algorithms,
+                        software architecture and research-oriented development.</p>
+                </div>
+            </div>
+            <div class="edu-node" data-aos="fade-up">
+                <div class="year">2020 - 2022</div>
+                <div>
+                    <h3>Advanced Level (Eng. Tech)</h3>
+                    <p>MO/Malwaththawala Central College</p>
+                    <p style="font-size: 0.9rem; margin-top: 15px; opacity: 0.7;">Distinguished academic performance in
+                        the Engineering Technology stream.</p>
+                </div>
+            </div>
+            <div class="edu-node" data-aos="fade-up">
+                <div class="year">2021</div>
+                <div>
+                    <h3>Diploma in English</h3>
+                    <p>Oration City Campus</p>
+                    <p style="font-size: 0.9rem; margin-top: 15px; opacity: 0.7;">Professional business communication
+                        and linguistics excellence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2 class="footer-cta serif" data-aos="fade-up">Let's build the <br>future together.</h2>
+
+        <div class="social-row" data-aos="fade-up">
+            <a href="https://github.com/shanilka1" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+            <a href="https://wa.me/94767094260" class="social-link"><i class="fab fa-whatsapp"></i></a>
+        </div>
+
+        <div style="margin-bottom: 80px;">
+            <p style="font-weight: 800; font-size: 1.4rem; letter-spacing: 1px;">shanilka.work@gmail.com</p>
+            <p style="color: var(--text-dim); margin-top: 10px;">+94 76 709 4260 | +94 71 937 4260</p>
+        </div>
+
+        <p style="font-size: 11px; opacity: 0.2; letter-spacing: 6px; text-transform: uppercase;">© 2026 SHANILKA
+            LAKSHAN • NSBM GREEN UNIVERSITY</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1200, once: true });
+
+        const cursor = document.getElementById('cursor');
+        const follower = document.getElementById('cursor-follower');
+        const links = document.querySelectorAll('a, .tech-card, .vlog-item, .project-visual');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            follower.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        });
+
+        links.forEach(l => {
+            l.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
+            l.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        // Dynamic Color Shifting Logic
+        let hue = 240;
+        function updateColors() {
+            hue = (hue + 0.2) % 360;
+            document.documentElement.style.setProperty('--accent', `hsl(${hue}, 75%, 65%)`);
+            document.documentElement.style.setProperty('--accent-glow', `hsla(${hue}, 75%, 65%, 0.25)`);
+            requestAnimationFrame(updateColors);
+        }
+        updateColors();
+    </script>
+</body>
+
+</html>
