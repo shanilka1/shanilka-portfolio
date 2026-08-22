@@ -2318,7 +2318,37 @@
 
       <div class="projects-grid" id="projectsGrid">
 
-        <!-- Project 1: AI Talent Hub -->
+        <!-- Project 1: EcoTrack -->
+        <article class="proj-card" data-aos="fade-up" data-project="ecotrack">
+          <div class="proj-img">
+            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1200" alt="EcoTrack - Habit &amp; Sustainability Platform" loading="lazy" />
+            <div class="proj-img-overlay"></div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-tags">
+              <span class="proj-tag">FLUTTER</span>
+              <span class="proj-tag">FIREBASE</span>
+              <span class="proj-tag">DART</span>
+              <span class="proj-tag">FIRESTORE</span>
+              <span class="proj-tag">MOBILE &amp; WEB</span>
+            </div>
+            <h4>EcoTrack – Habit &amp; Sustainability Tracker</h4>
+            <p>A modern cross-platform application that gamifies eco-friendly habits with real-time Firestore tracking, community challenges, leaderboards, and administrative controls.</p>
+            <div class="proj-links">
+              <a href="https://github.com/shanilka1/EcoTrack.git" class="proj-link" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i> GitHub
+              </a>
+              <a href="https://ecotrack-100ff.web.app" class="proj-link" target="_blank" rel="noopener">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+              <button class="proj-link view-details-btn" data-project="ecotrack">
+                <i class="fas fa-info-circle"></i> View Details
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: AI Talent Hub -->
         <article class="proj-card" data-aos="fade-up" data-project="ai-talent-hub">
           <div class="proj-img">
             <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1200" alt="AI Talent Hub" loading="lazy" />
@@ -2814,6 +2844,23 @@
 
     /* ── Project Modal Data ── */
     const projectData = {
+      'ecotrack': {
+        title: 'EcoTrack – Gamified Sustainability & Habit Tracking Platform',
+        tags: ['Flutter', 'Dart', 'Firebase Auth', 'Cloud Firestore', 'Firebase Hosting', 'Cloud Messaging'],
+        desc: 'EcoTrack is a full-featured cross-platform mobile and web application designed to inspire sustainable lifestyles. It empowers users to log eco-friendly activities, compete in community challenges, track their carbon-reduction progress, unlock milestone badges, and climb the live community leaderboard. Includes atomic backend transaction validation and an admin console.',
+        features: [
+          'Atomic point allocations and duplicate-safe daily logging via Firestore transactions',
+          'Sustainability challenges with real-time target tracking and single-claim reward systems',
+          'Community leaderboard rankings with dynamic tier level-ups and achievement badges',
+          'Progress analytics with responsive weekly trend charts and category breakdown distribution',
+          'Role-protected Admin Console for real-time CRUD management of activities, challenges & badges',
+          'Cross-platform Flutter architecture deployed on Mobile (Android/iOS) and Web'
+        ],
+        links: [
+          { name: 'GitHub Repository', url: 'https://github.com/shanilka1/EcoTrack.git', icon: 'fab fa-github' },
+          { name: 'Live Web App', url: 'https://ecotrack-100ff.web.app', icon: 'fas fa-external-link-alt' }
+        ]
+      },
       'ai-talent-hub': {
         title: 'AI Talent Hub',
         tags: ['ASP.NET Core', 'C#', 'SQL Server', 'OpenAI', 'HTML/CSS/JS'],
