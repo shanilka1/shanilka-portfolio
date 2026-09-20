@@ -2347,6 +2347,31 @@
 
       <div class="projects-grid" id="projectsGrid">
 
+        <!-- Project: AirSense IoT -->
+        <article class="proj-card" data-aos="fade-up" data-project="airsense">
+          <div class="proj-img">
+            <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?q=80&w=1200" alt="AirSense IoT Project" loading="lazy" />
+            <div class="proj-img-overlay"></div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-tags">
+              <span class="proj-tag">IoT</span>
+              <span class="proj-tag">JAVASCRIPT</span>
+              <span class="proj-tag">HARDWARE</span>
+            </div>
+            <h4>AirSense IoT Environmental Monitor</h4>
+            <p>An innovative IoT-based project to monitor air quality, capturing sensor data in real-time to track environmental conditions.</p>
+            <div class="proj-links">
+              <a href="https://github.com/shanilka1/AirSense" class="proj-link" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i> GitHub
+              </a>
+              <button class="proj-link view-details-btn" data-project="airsense">
+                <i class="fas fa-info-circle"></i> View Details
+              </button>
+            </div>
+          </div>
+        </article>
+
         <!-- Project 1: Restaurant POS System -->
         <article class="proj-card" data-aos="fade-up" data-project="restaurant-pos">
           <div class="proj-img">
@@ -2472,6 +2497,9 @@
             <div class="proj-links">
               <a href="https://github.com/shanilka1/MyICT" class="proj-link" target="_blank" rel="noopener">
                 <i class="fab fa-github"></i> GitHub
+              </a>
+              <a href="https://slrict.com" class="proj-link" target="_blank" rel="noopener">
+                <i class="fas fa-external-link-alt"></i> Live Demo
               </a>
               <button class="proj-link view-details-btn" data-project="slr-ict">
                 <i class="fas fa-info-circle"></i> View Details
@@ -2898,6 +2926,30 @@
 
     /* ── Project Modal Data ── */
     const projectData = {
+      'restaurant-pos': {
+        title: 'Restaurant POS Management System',
+        tags: ['JavaScript', 'HTML5', 'CSS3', 'POS System', 'Full-Stack'],
+        desc: 'A comprehensive Point of Sale system built for Applantics (Pvt) Ltd. It facilitates smooth restaurant operations, providing an intuitive interface for order management, billing, table tracking, and real-time inventory management.',
+        features: [
+          'Streamlined order placement and table management interface',
+          'Real-time inventory tracking and automated alerts',
+          'Comprehensive billing and receipt generation',
+          'Admin dashboard for sales analytics and reports'
+        ],
+        link: 'https://github.com/shanilka1/restaurant-pos-management-system'
+      },
+      'airsense': {
+        title: 'AirSense IoT Environmental Monitor',
+        tags: ['IoT', 'Hardware', 'Sensors', 'JavaScript', 'Real-time'],
+        desc: 'An innovative Internet of Things (IoT) project designed to monitor and analyze air quality. It leverages hardware sensors to capture environmental data in real-time, providing insights into air pollution levels.',
+        features: [
+          'Real-time environmental data capturing using IoT sensors',
+          'Live dashboard for monitoring air quality metrics',
+          'Automated alerts for dangerous pollution levels',
+          'Historical data analysis and trend visualization'
+        ],
+        link: 'https://github.com/shanilka1/AirSense'
+      },
       'ecotrack': {
         title: 'EcoTrack – Gamified Sustainability & Habit Tracking Platform',
         tags: ['Flutter', 'Dart', 'Firebase Auth', 'Cloud Firestore', 'Firebase Hosting', 'Cloud Messaging'],
@@ -2949,7 +3001,10 @@
           'Responsive cross-device UI designed with modern web standards',
           'Structured modular JavaScript architecture'
         ],
-        link: 'https://github.com/shanilka1/MyICT'
+        links: [
+          { name: 'GitHub Repository', url: 'https://github.com/shanilka1/MyICT', icon: 'fab fa-github' },
+          { name: 'Live Web App', url: 'https://slrict.com', icon: 'fas fa-external-link-alt' }
+        ]
       },
       'laundry-system': {
         title: 'Pick & Press – Laundry Management System',
